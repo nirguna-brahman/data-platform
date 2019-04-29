@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# The script churns aka install | manage all applications
+# The script churns aka install|start|stop|restart|delete and manage all applications needed
 # for the local dataplatform setup
 
 source ./config
@@ -42,21 +42,18 @@ print_config() {
 main() {
   parse_args $@
 
-  supported_apps=("spark" "flink" "kafka" "zookeeper")
-  supported_actions=("install" "delete" "start" "stop" "restart")
-
-  if [[ " ${supported_apps[*]} " == *"$app"*] && [ " ${supported_actions[*]} " == *"$action"* ]];
+  if [[ " ${supported_actions[*]} " == *"$action"* && (" ${supported_apps[*]} " == *"$app"* || $app == "all" ) ]];
   then
     create_dataplatform $download_dir
 
     case $action in
-      install) install $app
+      install) install ${app}
                ;;
-      start)   start $app
+      start)   start ${app}
                ;;
-      stop)    stop $app
+      stop)    stop ${app}
                ;;
-      restart) restart $app
+      restart) restart ${app}
                ;;
     esac
   else
