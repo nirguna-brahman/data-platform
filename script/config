@@ -1,0 +1,14 @@
+# Application download url's
+flink_dist_download_url=https://www-us.apache.org/dist/flink/flink-1.8.0/flink-1.8.0-bin-scala_2.12.tgz
+kafka_dist_download_url=https://www-eu.apache.org/dist/kafka/2.2.0/kafka_2.12-2.2.0.tgz
+spark_dist_download_url=https://www-eu.apache.org/dist/spark/spark-2.4.2/spark-2.4.2-bin-hadoop2.7.tgz
+zookeeper_dist_download_url=
+
+# All the downloads will go into $download_dir/data-platform/
+download_dir=$HOME
+
+# Supported apps
+supported_apps=("spark" "flink" "kafka")
+
+# Supported actions
+supported_actions=("install" "delete" "start" "stop" "restart")
