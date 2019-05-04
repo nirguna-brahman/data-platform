@@ -14,6 +14,10 @@ create_dataplatform() {
 install() {
   app=$1
 
+  if [[ $app == "zookeeper" ]]; then
+    return
+  fi
+
   if [[ ${app} == "all" ]]; then
     for app in ${supported_apps[*]}; do
       install $app
@@ -46,19 +50,45 @@ install() {
 }
 
 start() {
+  echo "in start......"
   if [[ ${app} == "all" ]]; then
     for app in ${supported_apps[*]}; do
       start $app
     done
   else {
-    1
+    case $app in
+      kafka)       ${download_dir}/data-platform/${app}/bin/kafka-server-start.sh ${download_dir}/data-platform/${app}/config/server.properties &
+                   ;;
+      zookeeper)   ${download_dir}/data-platform/kafka/bin/zookeeper-server-start.sh ${download_dir}/data-platform/kafka/config/zookeeper.properties &
+                   ;;
+      flink)       ${download_dir}/data-platform/${app}/bin/start-cluster.sh
+                   ;;
+      spark)       1
+                   ;;
+    esac
   }
   fi
 
 }
 
 stop() {
-  1
+  if [[ ${app} == "all" ]]; then
+    for app in ${supported_apps[*]}; do
+      start $app
+    done
+  else {
+    case $app in
+      kafka)       ${download_dir}/data-platform/${app}/bin/kafka-server-stop.sh
+                   ;;
+      zookeeper)   ${download_dir}/data-platform/kafka/bin/zookeeper-server-stop.sh
+                   ;;
+      flink)       ${download_dir}/data-platform/${app}/bin/stop-cluster.sh
+                   ;;
+      spark)       1
+                   ;;
+    esac
+  }
+  fi
 }
 
 delete() {
