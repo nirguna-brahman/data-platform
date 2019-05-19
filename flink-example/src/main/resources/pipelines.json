@@ -1,0 +1,12 @@
+{
+
+  "pipeline1": {
+    "task_graph" : "task1 -> task2 -> task3 -> task4 -> task5 -> sink(sink1, sink2)",
+    "comment" : "This does task1"
+  },
+
+  "pipeline2": {
+    "task_graph" :  "task3 -> task7 -> task8 -> task9 -> task10 -> sink(sink1, sink2)",
+    "comment" : "This does task2"
+  }
+}
