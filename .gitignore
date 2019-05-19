@@ -16,6 +16,7 @@ build
 gradle/wrapper/*
 gradlew
 gradlew.bat
+gradle
 
 # Ignore Gradle GUI config
 gradle-app.setting
