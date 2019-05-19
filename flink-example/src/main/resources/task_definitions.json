@@ -1,0 +1,5 @@
+{
+  "task1" : {
+    "transformer" : "com.nirgunabrahman.local.flink"
+  }
+}
